@@ -18,7 +18,6 @@ RUN apt-get update && \
     p7zip-full \
     && rm -rf /var/lib/apt/lists/*
 
-
 WORKDIR /build
 
 RUN curl -LO https://www.qhapaq.org/static/media/bin/orqha.7z && \
@@ -63,16 +62,15 @@ RUN mkdir /etc/mono/registry
 RUN chmod 0777 /etc/mono/registry
 
 COPY simple_pieces.png /shogi/pieces/simple_pieces.png
+COPY --from=0 /build/orqha /shogi/engines/yaneuraou/orqha
 
-ARG YANEURAOU_VERSION
 ARG SHOGIGUI_VERSION
-
 COPY --from=0 /build/ShogiGUIv${SHOGIGUI_VERSION} /shogi/shogigui
 COPY settings.xml /shogi/shogigui/settings.xml
 RUN chmod 0666 /shogi/shogigui/settings.xml
 
+ARG YANEURAOU_VERSION
 COPY --from=0 /build/YaneuraOu-${YANEURAOU_VERSION}/source/YaneuraOu-by-gcc /shogi/engines/yaneuraou/yaneuraou
-COPY --from=0 /build/orqha /shogi/engines/yaneuraou/orqha
 
 ENV HOME=/tmp
 
