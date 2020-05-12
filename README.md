@@ -34,7 +34,7 @@ docker image prune --filter label=app=shogigui --filter label=stage=build
 ### First run (retrieve `settings.xml` with pre-configured engine parameters)
 ```bash
 mkdir $HOME/.shogigui/
-docker run --rm shogigui:latest cat /shogi/shogigui/settings.xml > $HOME/.shogigui/settings.xml
+wget -O $HOME/.shogigui/settings.xml https://raw.githubusercontent.com/jruffet/docker-shogigui/master/settings.xml
 ```
 
 ### Launch the interface
