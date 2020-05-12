@@ -164,7 +164,7 @@
     <AutoSave>false</AutoSave>
     <AutoBackUp>false</AutoBackUp>
     <AutoSaveMin>5</AutoSaveMin>
-    <AutoBackupFolder>/root/ShogiGUI/kif</AutoBackupFolder>
+    <AutoBackupFolder>/shogi/games/backup</AutoBackupFolder>
     <RankStyle>Number</RankStyle>
   </AppSettings>
   <GameSettings>
