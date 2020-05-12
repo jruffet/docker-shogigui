@@ -1,0 +1,433 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AppSettings>
+    <Reverse>false</Reverse>
+    <DispWindow>false</DispWindow>
+    <KomaOto>false</KomaOto>
+    <KomaAnimation>false</KomaAnimation>
+    <X>184</X>
+    <Y>43</Y>
+    <Width>1143</Width>
+    <Height>920</Height>
+    <Maximized>false</Maximized>
+    <DispTime>true</DispTime>
+    <DispEval>false</DispEval>
+    <DispState>false</DispState>
+    <DispEvalMove>false</DispEvalMove>
+    <DispBranch>true</DispBranch>
+    <NotationListViewMoveWidth>147</NotationListViewMoveWidth>
+    <NotationListViewTimeWidth>117</NotationListViewTimeWidth>
+    <NotationListViewEvalWidth>60</NotationListViewEvalWidth>
+    <NotationListViewStateWidth>40</NotationListViewStateWidth>
+    <NotationListViewEvalMoveWidth>40</NotationListViewEvalMoveWidth>
+    <ThinkInfoColumnWidth>
+      <int>21</int>
+      <int>60</int>
+      <int>60</int>
+      <int>111</int>
+      <int>60</int>
+      <int>559</int>
+    </ThinkInfoColumnWidth>
+    <AnalyzeListFormColumnWidth>
+      <int>130</int>
+      <int>60</int>
+      <int>60</int>
+      <int>113</int>
+      <int>500</int>
+      <int>80</int>
+      <int>60</int>
+    </AnalyzeListFormColumnWidth>
+    <AnalyzeCommentFormColumnWidth>
+      <int>40</int>
+      <int>21</int>
+      <int>60</int>
+      <int>60</int>
+      <int>111</int>
+      <int>60</int>
+      <int>559</int>
+    </AnalyzeCommentFormColumnWidth>
+    <SplitterDistance>581</SplitterDistance>
+    <UpSplitterDistance>552</UpSplitterDistance>
+    <WebTitle>true</WebTitle>
+    <WebName>true</WebName>
+    <TreeDiagramHighLight>true</TreeDiagramHighLight>
+    <TreeDiagramDispJoin>false</TreeDiagramDispJoin>
+    <JointBoardFormWidth>620</JointBoardFormWidth>
+    <JointBoardFormHeight>607</JointBoardFormHeight>
+    <KifuFilterIndex>1</KifuFilterIndex>
+    <KifuInitialDirectory>/shogi/games</KifuInitialDirectory>
+    <ImageFilterIndex>1</ImageFilterIndex>
+    <ImageInitialDirectory />
+    <UsePieceImage>false</UsePieceImage>
+    <PieceImageFilename>/shogi/pieces/simple_pieces.png</PieceImageFilename>
+    <UseBoardImage>false</UseBoardImage>
+    <BoardImageFilename />
+    <UseStandImage>false</UseStandImage>
+    <StandImageFilename />
+    <UseBgImage>false</UseBgImage>
+    <BgImageFilename />
+    <BgImageLyout>Tile</BgImageLyout>
+    <UseLastPieceBackColor>false</UseLastPieceBackColor>
+    <LastPieceBackColor>255</LastPieceBackColor>
+    <LastPieceBackColor>0</LastPieceBackColor>
+    <LastPieceBackColor>0</LastPieceBackColor>
+    <UsePieceSe>false</UsePieceSe>
+    <PieceSeFilename />
+    <ResultSe>false</ResultSe>
+    <CoordFont>Takao Pゴシック</CoordFont>
+    <CoordFontSize>6</CoordFontSize>
+    <CoordColor>Black</CoordColor>
+    <RuleLineColor>Black</RuleLineColor>
+    <CommentWindowFont />
+    <ConsiderFormColumnWidth>
+      <int>60</int>
+      <int>159</int>
+      <int>80</int>
+      <int>700</int>
+    </ConsiderFormColumnWidth>
+    <DragAndDrop>true</DragAndDrop>
+    <HintArrowDisp>true</HintArrowDisp>
+    <PlayInterval>500</PlayInterval>
+    <AnimaSpeed>Normal</AnimaSpeed>
+    <ComKomaAnima>false</ComKomaAnima>
+    <SendAllMoves>false</SendAllMoves>
+    <KibitzerFromCloumnWidth>
+      <int>60</int>
+      <int>100</int>
+      <int>80</int>
+      <int>400</int>
+    </KibitzerFromCloumnWidth>
+    <BookInitialDirectory />
+    <BookAddDirectory />
+    <BookAutoLoad>false</BookAutoLoad>
+    <BookDispEvalListView>true</BookDispEvalListView>
+    <BookStateColumnWidth>
+      <int>70</int>
+      <int>70</int>
+      <int>80</int>
+      <int>60</int>
+      <int>60</int>
+    </BookStateColumnWidth>
+    <BookEvalColumnWidth>
+      <int>70</int>
+      <int>70</int>
+      <int>70</int>
+      <int>70</int>
+    </BookEvalColumnWidth>
+    <BookEvalFormColumnWidth>
+      <int>70</int>
+      <int>70</int>
+      <int>70</int>
+      <int>70</int>
+    </BookEvalFormColumnWidth>
+    <DefaultBook>00000000-0000-0000-0000-000000000000</DefaultBook>
+    <BookAddNum>40</BookAddNum>
+    <BookGameNum>2</BookGameNum>
+    <BookAddComment>true</BookAddComment>
+    <BookPriorityOriginal>true</BookPriorityOriginal>
+    <BookBlackWeightNotAdd>false</BookBlackWeightNotAdd>
+    <BookWhiteWeightNotAdd>false</BookWhiteWeightNotAdd>
+    <BookHighLight>false</BookHighLight>
+    <BookDiagramHighLight>false</BookDiagramHighLight>
+    <BookDiagramDisplayActive>false</BookDiagramDisplayActive>
+    <Language>English</Language>
+    <MoveStyle>Kif</MoveStyle>
+    <AfterPosition>First</AfterPosition>
+    <LowPriority>true</LowPriority>
+    <NextMoveDisp>false</NextMoveDisp>
+    <GraphLiner>true</GraphLiner>
+    <WebImportUri></WebImportUri>
+    <LastPieceAlpha>255</LastPieceAlpha>
+    <DispComment>false</DispComment>
+    <NotationListViewCommentWidth>60</NotationListViewCommentWidth>
+    <AnalyzeCommentFormEngineNameWidth>120</AnalyzeCommentFormEngineNameWidth>
+    <MenuFont>Takao Pゴシック, 9pt</MenuFont>
+    <UseMenuFont>true</UseMenuFont>
+    <MainFormFont>Takao Pゴシック, 9pt</MainFormFont>
+    <UseMainFormFont>true</UseMainFormFont>
+    <HeaderFont>Takao Pゴシック, 9pt</HeaderFont>
+    <UseHeaderFont>true</UseHeaderFont>
+    <NotationFont>Takao Pゴシック, 9pt</NotationFont>
+    <UseNotationFont>true</UseNotationFont>
+    <EvalGraphFont>Takao Pゴシック, 9pt</EvalGraphFont>
+    <UseEvalGraphFont>false</UseEvalGraphFont>
+    <DialogFont>Takao Pゴシック, 9pt</DialogFont>
+    <UseDialogFont>true</UseDialogFont>
+    <WindowFont>Takao Pゴシック, 9pt</WindowFont>
+    <UseWindowFont>true</UseWindowFont>
+    <UserName />
+    <WarsUserName />
+    <TreeDiagramDispNewStyle>false</TreeDiagramDispNewStyle>
+    <BookTreeDiagramDispNewStyle>false</BookTreeDiagramDispNewStyle>
+    <KifuSaveFilterIndex>1</KifuSaveFilterIndex>
+    <AnalyzeArrowDisp>true</AnalyzeArrowDisp>
+    <AutoSave>false</AutoSave>
+    <AutoBackUp>false</AutoBackUp>
+    <AutoSaveMin>5</AutoSaveMin>
+    <AutoBackupFolder>/root/ShogiGUI/kif</AutoBackupFolder>
+    <RankStyle>Number</RankStyle>
+  </AppSettings>
+  <GameSettings>
+    <PlayerBlack>
+      <PlayerNo>0</PlayerNo>
+      <Player>You</Player>
+      <Name />
+      <Time>0</Time>
+      <Byoyomi>10</Byoyomi>
+    </PlayerBlack>
+    <PlayerWhite>
+      <PlayerNo>1</PlayerNo>
+      <Player>YaneuraOu NNUE 4.89 64AVX2</Player>
+      <Name />
+      <Time>0</Time>
+      <Byoyomi>10</Byoyomi>
+    </PlayerWhite>
+    <Handicap>HIRATE</Handicap>
+    <GameStartPosition>InitialPosition</GameStartPosition>
+    <UseWhiteTime>false</UseWhiteTime>
+    <CommentInsert>false</CommentInsert>
+    <DisableTimeout>false</DisableTimeout>
+    <CoundDownSound>false</CoundDownSound>
+    <EnableThknkInfo>true</EnableThknkInfo>
+    <DisableSound>true</DisableSound>
+    <RepeatPlay>true</RepeatPlay>
+    <NumberOfRepeatPlay>5</NumberOfRepeatPlay>
+    <DrawPlay>false</DrawPlay>
+    <NumberOfDrawPlay>256</NumberOfDrawPlay>
+    <AutoSave>false</AutoSave>
+    <AutoSaveFolder />
+    <OneNotation>false</OneNotation>
+    <BlackUseBook>false</BlackUseBook>
+    <BlackBook>00000000-0000-0000-0000-000000000000</BlackBook>
+    <WhiteUseBook>false</WhiteUseBook>
+    <WhiteBook>00000000-0000-0000-0000-000000000000</WhiteBook>
+    <WhiteBookPlay>40</WhiteBookPlay>
+    <SwapPlayer>true</SwapPlayer>
+    <AlwaysWakeUp>true</AlwaysWakeUp>
+    <ResultComment>false</ResultComment>
+  </GameSettings>
+  <ConsiderSettings>
+    <EngineNo>0</EngineNo>
+    <EngineName>YaneuraOu NNUE 4.89 64AVX2</EngineName>
+    <BranchFirst>false</BranchFirst>
+    <CommentInsert>true</CommentInsert>
+    <UseTime>false</UseTime>
+    <Infinite>true</Infinite>
+    <Time>30</Time>
+    <MultiPv>3</MultiPv>
+    <OwnBook>false</OwnBook>
+    <Depth>20</Depth>
+    <UseDepth>false</UseDepth>
+    <Nodes>10000000</Nodes>
+    <UseNodes>false</UseNodes>
+    <Engines />
+  </ConsiderSettings>
+  <HintSettings>
+    <EngineNo>0</EngineNo>
+    <EngineName />
+    <Time>5</Time>
+  </HintSettings>
+  <CheckmateSettings>
+    <EngineNo>0</EngineNo>
+    <EngineName />
+    <Infinite>true</Infinite>
+    <Time>1</Time>
+    <CommentInsert>true</CommentInsert>
+  </CheckmateSettings>
+  <AnalyzerSettings>
+    <EngineNo>0</EngineNo>
+    <EngineName>YaneuraOu NNUE 4.89 64AVX2</EngineName>
+    <CommentInsert>true</CommentInsert>
+    <Time>5</Time>
+    <Reverse>false</Reverse>
+    <CurrentPosition>true</CurrentPosition>
+    <AllMoves>false</AllMoves>
+    <SelectedMoves>false</SelectedMoves>
+    <StartPosition>0</StartPosition>
+    <EndPosition>9999</EndPosition>
+    <UseTime>true</UseTime>
+    <Depth>20</Depth>
+    <UseDepth>false</UseDepth>
+    <Nodes>10000000</Nodes>
+    <UseNodes>false</UseNodes>
+    <Continous>false</Continous>
+    <SubFolder>false</SubFolder>
+    <FolderName />
+    <MultiPV>3</MultiPV>
+  </AnalyzerSettings>
+  <KibitzerSettings>
+    <EngineNo>0</EngineNo>
+    <EngineName />
+    <AutoAnalyze>false</AutoAnalyze>
+    <Infinite>false</Infinite>
+    <Mate>false</Mate>
+    <Time>10</Time>
+  </KibitzerSettings>
+  <EngineList>
+    <Engine>
+      <Name>YaneuraOu NNUE 4.89 64AVX2</Name>
+      <Author>by yaneurao</Author>
+      <Path>/shogi/engines/yaneuraou/yaneuraou</Path>
+      <Encording>DEFAULT</Encording>
+      <optionList>
+        <option>
+          <Key>USI_Hash</Key>
+          <value xsi:type="xsd:int">1024</value>
+        </option>
+        <option>
+          <Key>USI_Ponder</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>Threads</Key>
+          <value xsi:type="xsd:int">4</value>
+        </option>
+        <option>
+          <Key>Hash</Key>
+          <value xsi:type="xsd:int">16</value>
+        </option>
+        <option>
+          <Key>EvalHash</Key>
+          <value xsi:type="xsd:int">128</value>
+        </option>
+        <option>
+          <Key>MultiPV</Key>
+          <value xsi:type="xsd:int">1</value>
+        </option>
+        <option>
+          <Key>SkillLevel</Key>
+          <value xsi:type="xsd:int">20</value>
+        </option>
+        <option>
+          <Key>WriteDebugLog</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>NetworkDelay</Key>
+          <value xsi:type="xsd:int">120</value>
+        </option>
+        <option>
+          <Key>NetworkDelay2</Key>
+          <value xsi:type="xsd:int">1120</value>
+        </option>
+        <option>
+          <Key>MinimumThinkingTime</Key>
+          <value xsi:type="xsd:int">2000</value>
+        </option>
+        <option>
+          <Key>SlowMover</Key>
+          <value xsi:type="xsd:int">100</value>
+        </option>
+        <option>
+          <Key>MaxMovesToDraw</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>DepthLimit</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>NodesLimit</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>Contempt</Key>
+          <value xsi:type="xsd:int">2</value>
+        </option>
+        <option>
+          <Key>ContemptFromBlack</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>EnteringKingRule</Key>
+          <value xsi:type="xsd:string">CSARule27</value>
+        </option>
+        <option>
+          <Key>EvalDir</Key>
+          <value xsi:type="xsd:string">orqha</value>
+        </option>
+        <option>
+          <Key>SkipLoadingEval</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>GenerateAllLegalMoves</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>NarrowBook</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>BookMoves</Key>
+          <value xsi:type="xsd:int">16</value>
+        </option>
+        <option>
+          <Key>BookIgnoreRate</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>BookFile</Key>
+          <value xsi:type="xsd:string">standard_book.db</value>
+        </option>
+        <option>
+          <Key>BookDir</Key>
+          <value xsi:type="xsd:string">book</value>
+        </option>
+        <option>
+          <Key>BookEvalDiff</Key>
+          <value xsi:type="xsd:int">30</value>
+        </option>
+        <option>
+          <Key>BookEvalBlackLimit</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>BookEvalWhiteLimit</Key>
+          <value xsi:type="xsd:int">-140</value>
+        </option>
+        <option>
+          <Key>BookDepthLimit</Key>
+          <value xsi:type="xsd:int">16</value>
+        </option>
+        <option>
+          <Key>BookOnTheFly</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>ConsiderBookMoveCount</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>BookPvMoves</Key>
+          <value xsi:type="xsd:int">8</value>
+        </option>
+        <option>
+          <Key>IgnoreBookPly</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>PvInterval</Key>
+          <value xsi:type="xsd:int">300</value>
+        </option>
+        <option>
+          <Key>ResignValue</Key>
+          <value xsi:type="xsd:int">99999</value>
+        </option>
+        <option>
+          <Key>EvalSaveDir</Key>
+          <value xsi:type="xsd:string">evalsave</value>
+        </option>
+        <option>
+          <Key>ConsiderationMode</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>OutputFailLHPV</Key>
+          <value xsi:type="xsd:boolean">true</value>
+        </option>
+      </optionList>
+    </Engine>
+  </EngineList>
+  <Books />
+</Settings>
