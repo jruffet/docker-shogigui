@@ -31,7 +31,8 @@ docker image prune --filter label=app=shogigui --filter label=stage=build
 ```
 
 ## Running ShogiGUI
-### First run: retrieve `settings.xml` with pre-configured parameters (engine configured, English language, sound disabled...)
+### First run
+Retrieve `settings.xml` with pre-configured parameters (engine configured, English language, sound disabled...)
 ```bash
 mkdir $HOME/.shogigui/
 wget -O $HOME/.shogigui/settings.xml https://raw.githubusercontent.com/jruffet/docker-shogigui/master/settings.xml
