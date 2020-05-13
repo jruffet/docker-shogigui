@@ -236,7 +236,7 @@
   </CheckmateSettings>
   <AnalyzerSettings>
     <EngineNo>0</EngineNo>
-    <EngineName>YaneuraOu NNUE 4.89 64AVX2</EngineName>
+    <EngineName>YaneuraOu + orqha</EngineName>
     <CommentInsert>true</CommentInsert>
     <Time>5</Time>
     <Reverse>false</Reverse>
@@ -265,7 +265,7 @@
   </KibitzerSettings>
   <EngineList>
     <Engine>
-      <Name>YaneuraOu NNUE 4.89 64AVX2</Name>
+      <Name>YaneuraOu + orqha</Name>
       <Author>by yaneurao</Author>
       <Path>/shogi/engines/yaneuraou/yaneuraou</Path>
       <Encording>DEFAULT</Encording>
