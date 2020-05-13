@@ -5,7 +5,7 @@ ARG YANEURAOU_TARGET_CPU=AVX2
 ARG NPROC=4
 
 # Build stage
-FROM ubuntu:19.10
+FROM ubuntu:19.10 AS build
 LABEL app=shogigui
 LABEL stage=build
 
@@ -23,10 +23,6 @@ WORKDIR /build
 RUN curl -LO https://www.qhapaq.org/static/media/bin/orqha.7z && \
     7z x orqha.7z
 
-ARG SHOGIGUI_VERSION
-RUN curl -LO http://shogigui.siganus.com/shogigui/ShogiGUIv${SHOGIGUI_VERSION}.zip && \
-    unzip ShogiGUIv${SHOGIGUI_VERSION}.zip
-
 ARG YANEURAOU_VERSION
 ARG YANEURAOU_TARGET_CPU
 ARG NPROC
@@ -35,6 +31,10 @@ RUN curl -LO https://github.com/yaneurao/YaneuraOu/archive/V${YANEURAOU_VERSION}
     cd YaneuraOu-${YANEURAOU_VERSION}/source && \
     sed "s/^TARGET_CPU =.*/TARGET_CPU = ${YANEURAOU_TARGET_CPU}/" -i Makefile && \
     make -j${NPROC}
+
+ARG SHOGIGUI_VERSION
+RUN curl -LO http://shogigui.siganus.com/shogigui/ShogiGUIv${SHOGIGUI_VERSION}.zip && \
+    unzip ShogiGUIv${SHOGIGUI_VERSION}.zip
 
 
 # Actual image, based on the work of https://github.com/s-shin/docker-shogi-gui
@@ -62,15 +62,15 @@ RUN mkdir /etc/mono/registry
 RUN chmod 0777 /etc/mono/registry
 
 COPY simple_pieces.png /shogi/pieces/simple_pieces.png
-COPY --from=0 /build/orqha /shogi/engines/yaneuraou/orqha
-
-ARG SHOGIGUI_VERSION
-COPY --from=0 /build/ShogiGUIv${SHOGIGUI_VERSION} /shogi/shogigui
-COPY settings.xml /shogi/shogigui/settings.xml
-RUN chmod 0666 /shogi/shogigui/settings.xml
+COPY --from=build /build/orqha /shogi/engines/yaneuraou/orqha
 
 ARG YANEURAOU_VERSION
-COPY --from=0 /build/YaneuraOu-${YANEURAOU_VERSION}/source/YaneuraOu-by-gcc /shogi/engines/yaneuraou/yaneuraou
+COPY --from=build /build/YaneuraOu-${YANEURAOU_VERSION}/source/YaneuraOu-by-gcc /shogi/engines/yaneuraou/yaneuraou
+
+ARG SHOGIGUI_VERSION
+COPY --from=build /build/ShogiGUIv${SHOGIGUI_VERSION} /shogi/shogigui
+COPY settings.xml /shogi/shogigui/settings.xml
+RUN chmod 0666 /shogi/shogigui/settings.xml
 
 ENV HOME=/tmp
 
