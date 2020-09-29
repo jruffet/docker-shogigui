@@ -208,7 +208,7 @@
   </GameSettings>
   <ConsiderSettings>
     <EngineNo>0</EngineNo>
-    <EngineName>YaneuraOu + orqha</EngineName>
+    <EngineName>YaneuraOu + orqha1018</EngineName>
     <BranchFirst>false</BranchFirst>
     <CommentInsert>true</CommentInsert>
     <UseTime>false</UseTime>
@@ -236,7 +236,7 @@
   </CheckmateSettings>
   <AnalyzerSettings>
     <EngineNo>0</EngineNo>
-    <EngineName>YaneuraOu + orqha</EngineName>
+    <EngineName>YaneuraOu + orqha1018</EngineName>
     <CommentInsert>true</CommentInsert>
     <Time>5</Time>
     <Reverse>false</Reverse>
@@ -265,7 +265,7 @@
   </KibitzerSettings>
   <EngineList>
     <Engine>
-      <Name>YaneuraOu + orqha</Name>
+      <Name>YaneuraOu + orqha1018</Name>
       <Author>by yaneurao</Author>
       <Path>/shogi/engines/yaneuraou/yaneuraou</Path>
       <Encording>DEFAULT</Encording>
@@ -344,7 +344,7 @@
         </option>
         <option>
           <Key>EvalDir</Key>
-          <value xsi:type="xsd:string">orqha</value>
+          <value xsi:type="xsd:string">orqha-1018</value>
         </option>
         <option>
           <Key>SkipLoadingEval</Key>

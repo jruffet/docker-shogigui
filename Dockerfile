@@ -20,8 +20,8 @@ RUN apt-get update && \
 
 WORKDIR /build
 
-RUN curl -LO https://www.qhapaq.org/static/media/bin/orqha.7z && \
-    7z x orqha.7z
+RUN curl -LO https://www.qhapaq.org/static/media/bin/orqha1018.7z && \
+    7z x orqha1018.7z
 
 ARG YANEURAOU_VERSION
 ARG YANEURAOU_TARGET_CPU
@@ -62,7 +62,7 @@ RUN mkdir /etc/mono/registry
 RUN chmod 0777 /etc/mono/registry
 
 COPY simple_pieces.png /shogi/pieces/simple_pieces.png
-COPY --from=build /build/orqha /shogi/engines/yaneuraou/orqha
+COPY --from=build /build/orqha-1018 /shogi/engines/yaneuraou/orqha-1018
 
 ARG YANEURAOU_VERSION
 COPY --from=build /build/YaneuraOu-${YANEURAOU_VERSION}/source/YaneuraOu-by-gcc /shogi/engines/yaneuraou/yaneuraou
