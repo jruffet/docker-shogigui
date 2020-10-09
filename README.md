@@ -45,6 +45,8 @@ docker run --rm --name shogigui --net host --user $UID:$UID -e DISPLAY -v $HOME/
 
 If you want to load / save game files, you can add `-v $HOME/somedir:/shogi/games`
 
+To use the simplified pieces embedded in this repository, you can go to Tools>Options>Design and check Image/Piece.
+
 ## Troubleshooting
 ### Could not open display (X-Server required. Check your DISPLAY environment variable)
 This should not happen if you use `--user $UID:$UID` when running the container.
@@ -56,4 +58,4 @@ xhost +local:
 
 ## Known bugs
 - If sound is activated in ShogiGUI, every piece move will cap a core to 100% usage
-- Sometimes ShogiGUI will crash with `System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.`
+- When engine analysis is running and you move your mouse in the engine output box, ShogiGUI will eventually crash with `System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.`
