@@ -14,8 +14,8 @@ lscpu | grep -Eo '(avx|sse)[^ ]+'
 
 ### Building the image
 ```bash
-SHOGIGUI_VERSION=0.0.7.21
-YANEURAOU_VERSION=4.91
+SHOGIGUI_VERSION=0.0.7.22
+YANEURAOU_VERSION=5.00
 YANEURAOU_TARGET_CPU=AVX2
 docker build --build-arg NPROC=$(nproc) \
              --build-arg SHOGIGUI_VERSION=$SHOGIGUI_VERSION \
