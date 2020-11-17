@@ -1,7 +1,7 @@
 # Docker ShogiGUI + Yaneuraou
 This repository aims at easily bringing to Linux ShogiGUI + YaneuraOu. 
 
-It is centered around a helper script (named "shogigui") to do all the dirty work for you.
+It is centered around a helper script (named "shogigui") to do all the dirty work for you (Install / setup of shogiGUI, compilation of YaneuraOu, configuration with NNUE eval functions, and much more...)
 
 The default configuration file provided sets the following :
 
