@@ -1,50 +1,47 @@
-# Docker ShogiGUI + Yaneuraou / orqha
+# Docker ShogiGUI + Yaneuraou
 
-## Docker
-### Configuration
-Choose the correct `YANEURAOU_TARGET_CPU`, as of may 2020 you can choose from :
-- INTEL : AVX512, AVX2, SSE42, SSE41, SSE2, NO_SSE
-- ARM : OTHER
-- AMD : ZEN2
+## Pre-requesites
+You need to install docker so that it is controllable by your desktop user.
 
-AVX2 should suit most, to check what is available to your CPU :
+Doing so is outside the scope of this repository, though.
+
+## Building the image
 ```bash
-lscpu | grep -Eo '(avx|sse)[^ ]+'
+./shogigui --build
 ```
-
-### Building the image
-```bash
-SHOGIGUI_VERSION=0.0.7.22
-YANEURAOU_VERSION=5.00
-YANEURAOU_TARGET_CPU=AVX2
-docker build --build-arg NPROC=$(nproc) \
-             --build-arg SHOGIGUI_VERSION=$SHOGIGUI_VERSION \
-             --build-arg YANEURAOU_VERSION=$YANEURAOU_VERSION \
-             --build-arg YANEURAOU_TARGET_CPU=$YANEURAOU_TARGET_CPU \
-             -t shogigui${SHOGIGUI_VERSION}:yaneuraou${YANEURAOU_VERSION}-${YANEURAOU_TARGET_CPU} \
-             -t shogigui:latest .
-```
+This will also automatically select the best CPU flag to use to compile YaneuraOu.
 
 ### Optional : Remove the builder image
 ```bash
-docker image prune --filter label=app=shogigui --filter label=stage=build
+./shogigui --cleanup
 ```
+Note that doing so will save space, but building the image again will take longer.
+
 
 ## Running ShogiGUI
-### First run
-Retrieve `settings.xml` with pre-configured parameters (engine configured, English language, sound disabled...)
-```bash
-mkdir $HOME/.shogigui/
-wget -O $HOME/.shogigui/settings.xml https://raw.githubusercontent.com/jruffet/docker-shogigui/master/settings.xml
 ```
-
-### Launch the interface
-```bash
-docker run --rm --name shogigui --net host --user $UID:$UID -e DISPLAY -v $HOME/.shogigui/settings.xml:/shogi/shogigui/settings.xml  shogigui:latest
+./shogigui
 ```
+That simple.
 
-If you want to load / save game files, you can add `-v $HOME/somedir:/shogi/games`
+### Load/Save games
+If you want to load / save game files, you can type :
+```bash
+./shogigui -g $HOME/somedir
+```
+This directory will be accessible at `/shogi/games` inside docker
 
+### Update settings.xml
+Along the way, on this repository engines may be added / replaced / enhanced.
+
+To keep up with those, you have to manually run :
+```bash
+./shogigui --update-settings
+```
+This is non-destructive, as it will only add missing engines to the settings.xml file.
+
+
+### Simplified pieces
 To use the simplified pieces embedded in this repository, you can go to Tools>Options>Design and check Image/Piece.
 
 ## Troubleshooting

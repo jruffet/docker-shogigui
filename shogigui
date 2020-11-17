@@ -1,0 +1,169 @@
+#!/bin/bash
+set -euo pipefail
+trap 'cleanup' ERR
+
+#######################################################
+## STATIC GLOBALS
+readonly SHOGIGUI_VERSION=0.0.7.22
+readonly YANEURAOU_VERSION=5.00
+
+readonly SCRIPT_NAME="shogigui"
+readonly CONF_DIR="$HOME/.shogigui"
+
+#######################################################
+## USAGE
+usage() {
+    cat <<EOF
+Usage: $SCRIPT_NAME [options] 
+
+Examples:
+    $SCRIPT_NAME --build
+    $SCRIPT_NAME
+    $SCRIPT_NAME -g $HOME/shogi/my_games
+    $SCRIPT_NAME -s some_path/settings.xml
+
+Options:
+    -h|--help              Display this help message
+    -b|--build             Build docker image
+    -c|--cleanup           Cleanup docker build images
+    -g|--games-dir         Mount local directory to /shogi/games
+    -s|--settings          Override location of settings.xml file (default: $CONF_DIR/settings.xml)
+    -u|--update-settings   Update settings.xml with latest engine list
+EOF
+    exit 0
+}
+
+#######################################################
+## LOGGING FRAMEWORK
+readonly NORMAL="\\e[0m"; readonly RED="\\e[1;31m"; readonly YELLOW="\\e[1;33m"; readonly DIM="\\e[2m"; readonly BLUE="\\e[1;34m"
+function _log() {
+    local color="$1"; local level="$2"; local message="$3"
+    printf "${color}%-s %s\\e[m\\n" "[${level}]" "$message"
+}
+function debug() { if [ "$verbose" = true ]; then _log "$DIM"    "DEBUG"   "$*"; fi }
+function log()   { _log "$NORMAL" "+"     "$*"; }
+function info()  { _log "$BLUE"   "+"     "$*"; }
+function warn()  { _log "$YELLOW" "?"     "$*"; }
+function error() { _log "$RED"    "!"     "$*"; }
+function fatal() { _log "$RED"    "FATAL" "$*"; exit 1 ; }
+
+#######################################################
+## SCRIPT FUNCTIONS
+function preflight_checks() {
+    cd $(dirname $0) || fatal "Cannot chdir to script directory"
+    [ "$UID" -eq 0 ] && fatal "This program should not be run as root"
+    for program in docker sponge; do
+        command -v $program >/dev/null 2>&1 || fatal "Command \"$program\" not found on the system"
+    done
+    docker ps >/dev/null 2>&1 || fatal "Docker cannot be operated by this user"
+    [ -d "$CONF_DIR" ] || mkdir "$CONF_DIR"
+}
+
+function cleanup() {
+    :
+}
+
+function build_docker_image() {
+    cpu_flags=$(lscpu | grep "^Flags")
+    # try those flags in order of preference
+    if $(lscpu | grep "^Model name" | grep -q AMD); then
+        YANEURAOU_TARGET_CPU=ZEN2
+    elif $(grep -q avx512 <<< $cpu_flags); then
+        YANEURAOU_TARGET_CPU=AVX512
+    elif $(grep -q avx2 <<< $cpu_flags); then
+        YANEURAOU_TARGET_CPU=AVX2
+    elif $(grep -q sse4_2 <<< $cpu_flags); then
+        YANEURAOU_TARGET_CPU=SSE42
+    elif $(grep -q sse4_1 <<< $cpu_flags); then
+        YANEURAOU_TARGET_CPU=SSE41
+    elif $(grep -q sse2 <<< $cpu_flags); then
+        YANEURAOU_TARGET_CPU=SSE2
+    else
+        YANEURAOU_TARGET_CPU=NO_SSE
+    fi
+
+    info "Auto selected CPU arch : $YANEURAOU_TARGET_CPU"
+    info "Building docker image with tag : shogigui${SHOGIGUI_VERSION}:yaneuraou${YANEURAOU_VERSION}-${YANEURAOU_TARGET_CPU}"
+    echo
+
+    docker build --build-arg NPROC=$(nproc) \
+                 --build-arg SHOGIGUI_VERSION=$SHOGIGUI_VERSION \
+                 --build-arg YANEURAOU_VERSION=$YANEURAOU_VERSION \
+                 --build-arg YANEURAOU_TARGET_CPU=$YANEURAOU_TARGET_CPU \
+                 -t shogigui${SHOGIGUI_VERSION}:yaneuraou${YANEURAOU_VERSION}-${YANEURAOU_TARGET_CPU} \
+                 -t shogigui:latest .
+}
+
+function cleanup_docker() {
+    docker image prune --filter label=app=shogigui --filter label=stage=build
+}
+
+function update_settings_file() {
+    for xml in xml/*.xml; do
+        name=$(grep -Eo '<Name>.*</Name>' $xml)
+
+        if ! grep -q "$name" $settings_file; then 
+            perl -e 'while(<>){if($_=~/.*<\/EngineList>.*/){system("cat '''$xml'''")};print}' $settings_file | sponge $settings_file
+        fi
+    done
+}
+
+#######################################################
+## MAIN
+preflight_checks
+
+extra_mount=
+games_dir=
+settings_file="$CONF_DIR/settings.xml"
+update_settings=0
+
+while [ $# -ne 0 ]; do
+    case "$1" in
+        -h|--help)
+            usage
+            ;;
+        -b|--build)
+            build_docker_image
+            exit 0
+            ;;
+        -u|--update-settings)
+            update_settings=1
+            ;;
+        -g|--games)
+            shift
+            [ $# -ge 1 ] || usage
+            readonly games_dir="$1"
+            ;;
+        -s|--settings)
+            shift
+            [ $# -ge 1 ] || usage
+            readonly settings_file="$1"
+            ;;
+        *)
+            error "Unrecognized command : $1"
+            usage
+            ;;
+    esac
+    shift
+done
+
+if [ "$update_settings" -eq 1 ]; then
+    info "Updating settings file"
+    update_settings_file
+    exit 0
+fi
+
+[ -n "$games_dir" ] && extra_mount="$extra_mount -v $games_dir:/shogi/games"
+if ! [ -e "$settings_file" ]; then
+    info "Copying the repository default settings.xml to $settings_file"
+    cp settings.xml $settings_file
+fi
+
+if docker inspect --type=image shogigui:latest >/dev/null 2>&1; then
+    docker run --rm --name shogigui --net host --user $UID:$UID -e DISPLAY \
+               -v $settings_file:/shogi/shogigui/settings.xml \
+               $extra_mount \
+               shogigui:latest
+else
+    fatal "Docker image shogigui:latest not found locally. Please run : shogigui --build"
+fi
