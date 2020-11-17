@@ -52,7 +52,7 @@ function fatal() { _log "$RED"    "FATAL" "$*"; exit 1 ; }
 function preflight_checks() {
     cd $(dirname $0) || fatal "Cannot chdir to script directory"
     [ "$UID" -eq 0 ] && fatal "This program should not be run as root"
-    for program in docker sponge; do
+    for program in docker; do
         command -v $program >/dev/null 2>&1 || fatal "Command \"$program\" not found on the system"
     done
     docker ps >/dev/null 2>&1 || fatal "Docker cannot be operated by this user"
@@ -99,11 +99,11 @@ function cleanup_docker() {
 }
 
 function update_settings_file() {
-    for xml in xml/*.xml; do
-        name=$(grep -Eo '<Name>.*</Name>' $xml)
-
-        if ! grep -q "$name" $settings_file; then 
-            perl -e 'while(<>){if($_=~/.*<\/EngineList>.*/){system("cat '''$xml'''")};print}' $settings_file | sponge $settings_file
+    grep -q '<EngineList />' $settings_file && sed -i 's#<EngineList />#<EngineList>\n</EngineList>#' $settings_file
+    for xml_file in xml/*.xml; do
+        name=$(grep -Eo '<Name>.*</Name>' $xml_file)
+        if ! grep -q "$name" $settings_file; then
+            sed -n -i -e "/<\/EngineList>/r $xml_file" -e 1x -e '2,${x;p}' -e '${x;p}' $settings_file
         fi
     done
 }
