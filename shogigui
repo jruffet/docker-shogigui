@@ -49,13 +49,11 @@ function fatal() { _log "$RED"    "FATAL" "$*"; exit 1 ; }
 #######################################################
 ## SCRIPT FUNCTIONS
 function preflight_checks() {
-    cd $(dirname $0) || fatal "Cannot chdir to script directory"
     [ "$UID" -eq 0 ] && fatal "This program should not be run as root"
     for program in docker sed nproc; do
         command -v $program >/dev/null 2>&1 || fatal "Command \"$program\" not found on the system"
     done
     docker ps >/dev/null 2>&1 || fatal "Docker cannot be operated by this user"
-    [ -d "$CONF_DIR" ] || mkdir "$CONF_DIR"
 }
 
 function cleanup() {
@@ -111,6 +109,9 @@ function update_settings_file() {
 #######################################################
 ## MAIN
 preflight_checks
+
+cd $(dirname $0) || fatal "Cannot chdir to script directory"
+[ -d "$CONF_DIR" ] || mkdir "$CONF_DIR" || fatal "Cannot mkdir $CONF_DIR"
 
 extra_mount=
 games_dir=
