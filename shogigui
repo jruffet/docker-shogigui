@@ -17,16 +17,15 @@ usage() {
 Usage: $SCRIPT_NAME [options] 
 
 Examples:
-    $SCRIPT_NAME --build
     $SCRIPT_NAME
-    $SCRIPT_NAME -g $HOME/shogi/my_games
-    $SCRIPT_NAME -s some_path/settings.xml
+    $SCRIPT_NAME --build
+    $SCRIPT_NAME -s some_path/settings.xml -g some_path/my_games
 
 Options:
     -h|--help              Display this help message
     -b|--build             Build docker image
     -c|--cleanup           Cleanup docker build images
-    -g|--games-dir         Mount local directory to /shogi/games
+    -g|--games-dir         Mount local directory to /shogi/games inside the container
     -s|--settings          Override location of settings.xml file (default: $CONF_DIR/settings.xml)
     -u|--update-settings   Update settings.xml with latest engine list
 EOF
@@ -52,7 +51,7 @@ function fatal() { _log "$RED"    "FATAL" "$*"; exit 1 ; }
 function preflight_checks() {
     cd $(dirname $0) || fatal "Cannot chdir to script directory"
     [ "$UID" -eq 0 ] && fatal "This program should not be run as root"
-    for program in docker; do
+    for program in docker sed nproc; do
         command -v $program >/dev/null 2>&1 || fatal "Command \"$program\" not found on the system"
     done
     docker ps >/dev/null 2>&1 || fatal "Docker cannot be operated by this user"
@@ -95,6 +94,7 @@ function build_docker_image() {
 }
 
 function cleanup_docker() {
+    info "Pruning all images with labels : app=shogigui + stage=build"
     docker image prune --filter label=app=shogigui --filter label=stage=build
 }
 
@@ -121,6 +121,10 @@ while [ $# -ne 0 ]; do
     case "$1" in
         -h|--help)
             usage
+            ;;
+        -c|--cleanup)
+            cleanup_docker
+            exit 0
             ;;
         -b|--build)
             build_docker_image
@@ -155,7 +159,7 @@ fi
 
 [ -n "$games_dir" ] && extra_mount="$extra_mount -v $games_dir:/shogi/games"
 if ! [ -e "$settings_file" ]; then
-    info "Copying the repository default settings.xml to $settings_file"
+    info "Copying repository settings.xml to $settings_file"
     cp settings.xml $settings_file
 fi
 
