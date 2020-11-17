@@ -1,4 +1,15 @@
 # Docker ShogiGUI + Yaneuraou
+This repository aims at easily bringing to Linux ShogiGUI + YaneuraOu
+
+It is centered around a helper script to do all the dirty work for you.
+
+The default configuration file provided sets the following :
+
+- English language
+- Set up japanese fonts
+- Multiple up-to-date engines (YaneuraOu/elmo and YaneuraOu/orqha-1018)
+- Disable sound (see "Troubleshooting" below)
+- Prepares use of simplified pieces (see "Simplified pieces" below)
 
 ## Pre-requesites
 You need to install docker so that it is controllable by your desktop user.
