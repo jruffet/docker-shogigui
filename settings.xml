@@ -191,8 +191,8 @@
     <CoundDownSound>false</CoundDownSound>
     <EnableThknkInfo>true</EnableThknkInfo>
     <DisableSound>true</DisableSound>
-    <RepeatPlay>true</RepeatPlay>
-    <NumberOfRepeatPlay>5</NumberOfRepeatPlay>
+    <RepeatPlay>false</RepeatPlay>
+    <NumberOfRepeatPlay>1</NumberOfRepeatPlay>
     <DrawPlay>false</DrawPlay>
     <NumberOfDrawPlay>256</NumberOfDrawPlay>
     <AutoSave>false</AutoSave>
