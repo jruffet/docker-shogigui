@@ -100,14 +100,20 @@ function cleanup_docker() {
 }
 
 function update_settings_file() {
-    info "Updating settings file"
+    local updated_settings_file=0
     grep -q '<EngineList />' $settings_file && sed -i 's#<EngineList />#<EngineList>\n</EngineList>#' $settings_file
     for xml_file in xml/*.xml; do
         name=$(grep -Eo '<Name>.*</Name>' $xml_file)
+        engine_name=$(perl -pe 's#<Name>(.*)</Name>#$1#' <<< $name)
         if ! grep -q "$name" $settings_file; then
+            updated_settings_file=1
+            info "Adding engine : $engine_name"
             sed -n -i -e "/<\/EngineList>/r $xml_file" -e 1x -e '2,${x;p}' -e '${x;p}' $settings_file
         fi
     done
+    if [ "$updated_settings_file" -eq 0 ]; then
+        info "All engines already configured in the settings file, not updating"
+    fi
 }
 
 function run() {
