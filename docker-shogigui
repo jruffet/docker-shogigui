@@ -7,7 +7,7 @@ trap 'cleanup' ERR
 readonly SHOGIGUI_VERSION=0.0.7.22
 readonly YANEURAOU_VERSION=5.00
 
-readonly SCRIPT_NAME="shogigui-docker"
+readonly SCRIPT_NAME="docker-shogigui"
 readonly CONF_DIR="$HOME/.shogigui"
 
 #######################################################
