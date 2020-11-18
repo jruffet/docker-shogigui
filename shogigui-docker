@@ -7,27 +7,30 @@ trap 'cleanup' ERR
 readonly SHOGIGUI_VERSION=0.0.7.22
 readonly YANEURAOU_VERSION=5.00
 
-readonly SCRIPT_NAME="shogigui"
+readonly SCRIPT_NAME="shogigui-docker"
 readonly CONF_DIR="$HOME/.shogigui"
 
 #######################################################
 ## USAGE
 usage() {
     cat <<EOF
-Usage: $SCRIPT_NAME [options] 
+Usage: $SCRIPT_NAME [command] [options] 
 
 Examples:
-    $SCRIPT_NAME
     $SCRIPT_NAME --build
-    $SCRIPT_NAME -s some_path/settings.xml -g some_path/my_games
+    $SCRIPT_NAME --run
+    $SCRIPT_NAME --run -s some_path/settings.xml -g some_path/my_games
 
-Options:
+Commands:
     -h|--help              Display this help message
     -b|--build             Build docker image
     -c|--cleanup           Cleanup docker build images
+    -r|--run               Run ShogiGUI inside a container
+    -u|--update-settings   Update settings.xml with engines in the images
+
+Options:
     -g|--games-dir         Mount local directory to /shogi/games inside the container
     -s|--settings          Override location of settings.xml file (default: $CONF_DIR/settings.xml)
-    -u|--update-settings   Update settings.xml with latest engine list
 EOF
     exit 0
 }
@@ -97,6 +100,7 @@ function cleanup_docker() {
 }
 
 function update_settings_file() {
+    info "Updating settings file"
     grep -q '<EngineList />' $settings_file && sed -i 's#<EngineList />#<EngineList>\n</EngineList>#' $settings_file
     for xml_file in xml/*.xml; do
         name=$(grep -Eo '<Name>.*</Name>' $xml_file)
@@ -106,6 +110,21 @@ function update_settings_file() {
     done
 }
 
+function run() {
+    if ! [ -e "$settings_file" ]; then
+        info "Copying repository settings.xml to $settings_file"
+        cp settings.xml $settings_file
+    fi
+    if docker inspect --type=image shogigui:latest >/dev/null 2>&1; then
+    docker run --rm --name shogigui --net host --user $UID:$UID -e DISPLAY \
+               -v $settings_file:/shogi/shogigui/settings.xml \
+               $extra_mount \
+               shogigui:latest
+    else
+        fatal "Docker image shogigui:latest not found locally. Please run : shogigui --build"
+    fi
+}
+
 #######################################################
 ## MAIN
 preflight_checks
@@ -113,26 +132,27 @@ preflight_checks
 cd $(dirname $0) || fatal "Cannot chdir to script directory"
 [ -d "$CONF_DIR" ] || mkdir "$CONF_DIR" || fatal "Cannot mkdir $CONF_DIR"
 
+command=
 extra_mount=
 games_dir=
 settings_file="$CONF_DIR/settings.xml"
-update_settings=0
 
 while [ $# -ne 0 ]; do
     case "$1" in
         -h|--help)
             usage
             ;;
-        -c|--cleanup)
-            cleanup_docker
-            exit 0
-            ;;
         -b|--build)
-            build_docker_image
-            exit 0
+            command="build_docker_image"
+            ;;
+        -c|--cleanup)
+            command="cleanup_docker"
+            ;;
+        -r|--run)
+            command="run"
             ;;
         -u|--update-settings)
-            update_settings=1
+            command="update_settings_file"
             ;;
         -g|--games)
             shift
@@ -152,23 +172,15 @@ while [ $# -ne 0 ]; do
     shift
 done
 
-if [ "$update_settings" -eq 1 ]; then
-    info "Updating settings file"
-    update_settings_file
-    exit 0
-fi
-
 [ -n "$games_dir" ] && extra_mount="$extra_mount -v $games_dir:/shogi/games"
-if ! [ -e "$settings_file" ]; then
-    info "Copying repository settings.xml to $settings_file"
-    cp settings.xml $settings_file
+
+if [ -n "$command" ]; then
+    $command
+    exit 0
+else
+    error "No command specified"
+    usage
 fi
 
-if docker inspect --type=image shogigui:latest >/dev/null 2>&1; then
-    docker run --rm --name shogigui --net host --user $UID:$UID -e DISPLAY \
-               -v $settings_file:/shogi/shogigui/settings.xml \
-               $extra_mount \
-               shogigui:latest
-else
-    fatal "Docker image shogigui:latest not found locally. Please run : shogigui --build"
-fi
+
+

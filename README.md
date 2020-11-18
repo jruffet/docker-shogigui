@@ -1,7 +1,7 @@
 # Docker ShogiGUI + Yaneuraou
 This repository aims at easily bringing ShogiGUI + YaneuraOu to Linux.
 
-It is centered around a helper script (named "shogigui") to do all the dirty work for you (building / running the docker image, with install / setup of shogiGUI, compilation of YaneuraOu, configuration with NNUE eval functions, and much more...)
+It is centered around a helper script (named `shogigui-docker`) to do all the dirty work for you (building / running the docker image, with install / setup of shogiGUI, compilation of YaneuraOu, configuration with NNUE eval functions, and much more...)
 
 The default configuration file provided sets the following options :
 
@@ -18,27 +18,27 @@ Doing so is outside the scope of this repository, though.
 
 ## Building the image
 ```bash
-./shogigui --build
+./shogigui-docker --build
 ```
 This will also automatically select the best CPU flag to use to compile YaneuraOu.
 
 ### Optional : Remove the builder image
 ```bash
-./shogigui --cleanup
+./shogigui-docker --cleanup
 ```
 Note that doing so will save space, but building the image again will take longer.
 
 
-## Running ShogiGUI
-```
-./shogigui
+## Running ShogiGUI as a container
+```bash
+./shogigui-docker --run
 ```
 That simple.
 
 ### Load/Save games
 If you want to load / save game files, you can type :
 ```bash
-./shogigui -g $HOME/somedir
+./shogigui-docker -g $HOME/somedir
 ```
 This directory will be accessible at `/shogi/games` inside the container
 
@@ -47,7 +47,7 @@ Along the way, on this repository engines may be added / replaced / enhanced.
 
 To keep up with those, you have to manually run :
 ```bash
-./shogigui --update-settings
+./shogigui-docker --update-settings
 ```
 This is non-destructive, as it will only add missing engines to the settings.xml file.
 
@@ -55,7 +55,7 @@ This is non-destructive, as it will only add missing engines to the settings.xml
 ### And more...
 For all the available commands, type :
 ```bash
-./shogigui --help
+./shogigui-docker --help
 ```
 
 ### Simplified pieces
