@@ -38,7 +38,7 @@ That simple.
 ### Load/Save games
 If you want to load / save game files, you can type :
 ```bash
-./shogigui-docker -g $HOME/somedir
+./shogigui-docker --run -g $HOME/somedir
 ```
 This directory will be accessible at `/shogi/games` inside the container
 
