@@ -64,7 +64,7 @@ function cleanup() {
 }
 
 function build_docker_image() {
-    cpu_flags=$(lscpu | grep "^Flags")
+    cpu_flags=$(grep -m1 '^flags' /proc/cpuinfo)
     # try those flags in order of preference
     if $(lscpu | grep "^Model name" | grep -q AMD); then
         YANEURAOU_TARGET_CPU=ZEN2
