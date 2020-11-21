@@ -29,7 +29,7 @@ This will also automatically select the best CPU flag to use to compile YaneuraO
 Note that doing so will save space, but building the image again will take longer.
 
 
-## Running ShogiGUI as a container
+## Running ShogiGUI inside a container
 ```bash
 ./docker-shogigui --run
 ```
@@ -45,7 +45,7 @@ This directory will be accessible at `/shogi/games` inside the container
 ### Update settings.xml
 Along the way, on this repository engines may be added / replaced / enhanced.
 
-To keep up with those, you have to manually run :
+To keep up with those, you have to manually run (**after** having built the latest image) :
 ```bash
 ./docker-shogigui --update-settings
 ```
