@@ -1,6 +1,6 @@
 # Shogigui + Yaneuraou (elmo, orqha1018)
 ARG SHOGIGUI_VERSION=0.0.7.22
-ARG YANEURAOU_VERSION=5.00
+ARG YANEURAOU_VERSION=5.33
 ARG YANEURAOU_TARGET_CPU=AVX2
 ARG NPROC=4
 
@@ -39,8 +39,8 @@ RUN gdown --id $ELMO_GDRIVE_ID -O elmo.zip && \
 ARG YANEURAOU_VERSION
 ARG YANEURAOU_TARGET_CPU
 ARG NPROC
-RUN curl -LO https://github.com/yaneurao/YaneuraOu/archive/V${YANEURAOU_VERSION}.tar.gz && \
-    tar xzfv V${YANEURAOU_VERSION}.tar.gz && \
+RUN curl -LO https://github.com/yaneurao/YaneuraOu/archive/v${YANEURAOU_VERSION}.tar.gz && \
+    tar xzfv v${YANEURAOU_VERSION}.tar.gz && \
     cd YaneuraOu-${YANEURAOU_VERSION}/source && \
     make -j${NPROC} TARGET_CPU=${YANEURAOU_TARGET_CPU}
 
