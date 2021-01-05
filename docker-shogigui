@@ -5,7 +5,7 @@ trap 'cleanup' ERR
 #######################################################
 ## STATIC GLOBALS
 readonly SHOGIGUI_VERSION=0.0.7.22
-readonly YANEURAOU_VERSION=5.33
+readonly YANEURAOU_VERSION=6.00
 
 readonly SCRIPT_NAME="docker-shogigui"
 readonly CONF_DIR="$HOME/.shogigui"
@@ -23,7 +23,7 @@ Examples:
 
 Commands:
     -h|--help              Display this help message
-    -b|--build             Build docker image
+    -b|--build             Build docker image (do that first !)
     -c|--cleanup           Cleanup docker build images
     -r|--run               Run ShogiGUI inside a container
     -u|--update-settings   Update settings.xml with engines in the images
@@ -143,6 +143,7 @@ extra_mount=
 games_dir=
 settings_file="$CONF_DIR/settings.xml"
 
+[ $# -eq 0 ] && usage
 while [ $# -ne 0 ]; do
     case "$1" in
         -h|--help)
