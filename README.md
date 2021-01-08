@@ -72,4 +72,3 @@ xhost +local:
 
 ## Known bugs
 - If sound is activated in ShogiGUI, every piece move will cap a core to 100% usage
-- When engine analysis is running and you move your mouse in the engine output box, ShogiGUI will eventually crash with `System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.`
