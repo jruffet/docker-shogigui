@@ -22,15 +22,16 @@ Examples:
     $SCRIPT_NAME --run -s some_path/settings.xml -g some_path/my_games
 
 Commands:
-    -h|--help              Display this help message
     -b|--build             Build docker image (do that first !)
-    -c|--cleanup           Cleanup docker build images
     -r|--run               Run ShogiGUI inside a container
-    -u|--update-settings   Update settings.xml with engines in the images
+    -u|--update-settings   Update engines in settings.xml with those in the repo
+    -c|--cleanup           Cleanup docker build images made by this script
+    -h|--help              Display this help message
 
 Options:
     -g|--games-dir         Mount local directory to /shogi/games inside the container
     -s|--settings          Override location of settings.xml file (default: $CONF_DIR/settings.xml)
+    -i|--image             Use a specific image name:tag instead of shogigui:latest
 EOF
     exit 0
 }
@@ -121,13 +122,13 @@ function run() {
         info "Copying repository settings.xml to $settings_file"
         cp settings.xml $settings_file
     fi
-    if docker inspect --type=image shogigui:latest >/dev/null 2>&1; then
+    if docker inspect --type=image $image_name_tag >/dev/null 2>&1; then
     docker run --rm --name shogigui --net host --user $UID:$UID -e DISPLAY \
                -v $settings_file:/shogi/shogigui/settings.xml \
                $extra_mount \
-               shogigui:latest
+               $image_name_tag
     else
-        fatal "Docker image shogigui:latest not found locally. Please run : shogigui --build"
+        fatal "Docker image \"$image_name_tag\" not found locally. Please run: shogigui --build"
     fi
 }
 
@@ -142,6 +143,7 @@ command=
 extra_mount=
 games_dir=
 settings_file="$CONF_DIR/settings.xml"
+image_name_tag="shogigui:latest"
 
 [ $# -eq 0 ] && usage
 while [ $# -ne 0 ]; do
@@ -170,6 +172,11 @@ while [ $# -ne 0 ]; do
             shift
             [ $# -ge 1 ] || usage
             readonly settings_file="$1"
+            ;;
+        -i|--image)
+            shift
+            [ $# -ge 1 ] || usage
+            readonly image_name_tag="$1"
             ;;
         *)
             error "Unrecognized command : $1"
