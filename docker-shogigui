@@ -4,8 +4,8 @@ trap 'cleanup' ERR
 
 #######################################################
 ## STATIC GLOBALS
-readonly SHOGIGUI_VERSION=0.0.7.23
-readonly YANEURAOU_VERSION=6.00
+readonly SHOGIGUI_VERSION=0.0.7.26
+readonly YANEURAOU_VERSION=7.00
 
 readonly SCRIPT_NAME="docker-shogigui"
 readonly CONF_DIR="$HOME/.shogigui"
