@@ -430,6 +430,170 @@
       </optionList>
     </Engine>
     <Engine>
+      <Name>YaneuraOu + suisho</Name>
+      <Author>by yaneurao</Author>
+      <Path>/shogi/engines/yaneuraou/yaneuraou</Path>
+      <Encording>DEFAULT</Encording>
+      <optionList>
+        <option>
+          <Key>USI_Hash</Key>
+          <value xsi:type="xsd:int">512</value>
+        </option>
+        <option>
+          <Key>USI_Ponder</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>Threads</Key>
+          <value xsi:type="xsd:int">4</value>
+        </option>
+        <option>
+          <Key>EvalHash</Key>
+          <value xsi:type="xsd:int">512</value>
+        </option>
+        <option>
+          <Key>MultiPV</Key>
+          <value xsi:type="xsd:int">1</value>
+        </option>
+        <option>
+          <Key>SkillLevel</Key>
+          <value xsi:type="xsd:int">20</value>
+        </option>
+        <option>
+          <Key>WriteDebugLog</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>NetworkDelay</Key>
+          <value xsi:type="xsd:int">120</value>
+        </option>
+        <option>
+          <Key>NetworkDelay2</Key>
+          <value xsi:type="xsd:int">120</value>
+        </option>
+        <option>
+          <Key>MinimumThinkingTime</Key>
+          <value xsi:type="xsd:int">2000</value>
+        </option>
+        <option>
+          <Key>SlowMover</Key>
+          <value xsi:type="xsd:int">100</value>
+        </option>
+        <option>
+          <Key>MaxMovesToDraw</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>DepthLimit</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>NodesLimit</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>Contempt</Key>
+          <value xsi:type="xsd:int">2</value>
+        </option>
+        <option>
+          <Key>ContemptFromBlack</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>EnteringKingRule</Key>
+          <value xsi:type="xsd:string">CSARule27</value>
+        </option>
+        <option>
+          <Key>EvalDir</Key>
+          <value xsi:type="xsd:string">suisho</value>
+        </option>
+        <option>
+          <Key>SkipLoadingEval</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>GenerateAllLegalMoves</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>USI_OwnBook</Key>
+          <value xsi:type="xsd:boolean">true</value>
+        </option>
+        <option>
+          <Key>NarrowBook</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>BookMoves</Key>
+          <value xsi:type="xsd:int">16</value>
+        </option>
+        <option>
+          <Key>BookIgnoreRate</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>BookFile</Key>
+          <value xsi:type="xsd:string">standard_book.db</value>
+        </option>
+        <option>
+          <Key>BookDir</Key>
+          <value xsi:type="xsd:string">book</value>
+        </option>
+        <option>
+          <Key>BookEvalDiff</Key>
+          <value xsi:type="xsd:int">30</value>
+        </option>
+        <option>
+          <Key>BookEvalBlackLimit</Key>
+          <value xsi:type="xsd:int">0</value>
+        </option>
+        <option>
+          <Key>BookEvalWhiteLimit</Key>
+          <value xsi:type="xsd:int">-140</value>
+        </option>
+        <option>
+          <Key>BookDepthLimit</Key>
+          <value xsi:type="xsd:int">16</value>
+        </option>
+        <option>
+          <Key>BookOnTheFly</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>ConsiderBookMoveCount</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>BookPvMoves</Key>
+          <value xsi:type="xsd:int">8</value>
+        </option>
+        <option>
+          <Key>IgnoreBookPly</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>PvInterval</Key>
+          <value xsi:type="xsd:int">300</value>
+        </option>
+        <option>
+          <Key>ResignValue</Key>
+          <value xsi:type="xsd:int">99999</value>
+        </option>
+        <option>
+          <Key>EvalSaveDir</Key>
+          <value xsi:type="xsd:string">evalsave</value>
+        </option>
+        <option>
+          <Key>ConsiderationMode</Key>
+          <value xsi:type="xsd:boolean">false</value>
+        </option>
+        <option>
+          <Key>OutputFailLHPV</Key>
+          <value xsi:type="xsd:boolean">true</value>
+        </option>
+      </optionList>
+    </Engine>
+    <Engine>
       <Name>YaneuraOu + orqha1018</Name>
       <Author>by yaneurao</Author>
       <Path>/shogi/engines/yaneuraou/yaneuraou</Path>
