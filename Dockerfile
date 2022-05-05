@@ -1,6 +1,6 @@
 # Shogigui + Yaneuraou (elmo, orqha1018)
-ARG SHOGIGUI_VERSION=0.0.7.26
-ARG YANEURAOU_VERSION=7.00
+ARG SHOGIGUI_VERSION=0.0.7.27
+ARG YANEURAOU_VERSION=7.10
 ARG YANEURAOU_TARGET_CPU=AVX2
 ARG NPROC=4
 
@@ -8,7 +8,7 @@ ARG NPROC=4
 ARG ELMO_GDRIVE_ID="1qhutTzaog4pHqh0OPAhJuf8mCwPAl5r7"
 
 # Build stage
-FROM ubuntu:21.10 AS build
+FROM ubuntu:22.04 AS build
 LABEL app=shogigui
 LABEL stage=build
 
@@ -52,7 +52,7 @@ RUN curl -LO http://shogigui.siganus.com/shogigui/ShogiGUIv${SHOGIGUI_VERSION}.z
 
 
 # Actual image, based on the work of https://github.com/s-shin/docker-shogi-gui
-FROM ubuntu:21.10
+FROM ubuntu:22.04
 
 # for tzdata
 ENV DEBIAN_FRONTEND=noninteractive
@@ -79,7 +79,6 @@ COPY --from=build /build/elmo/eval /shogi/engines/yaneuraou/elmo
 ARG YANEURAOU_VERSION
 COPY --from=build /build/YaneuraOu-${YANEURAOU_VERSION}/source/YaneuraOu-by-gcc /shogi/engines/yaneuraou/yaneuraou
 
-ARG SHOGIGUI_VERSION
 COPY --from=build /build/ShogiGUI /shogi/shogigui
 COPY settings.xml /shogi/shogigui/settings.xml
 RUN chmod 0666 /shogi/shogigui/settings.xml
