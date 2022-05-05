@@ -7,7 +7,7 @@ The default configuration file provided sets the following options :
 
 - English language
 - Set up japanese fonts to look better
-- Multiple up-to-date engines configured (YaneuraOu/elmo and YaneuraOu/orqha-1018)
+- Multiple engines configured (YaneuraOu + elmo / suisho / orqha-1018)
 - Disable sound (see "Troubleshooting" below)
 - Allow the usage of simplified pieces (see "Simplified pieces" below)
 
