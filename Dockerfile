@@ -1,6 +1,6 @@
 # Shogigui + Yaneuraou (elmo, suisho, orqha1018)
-ARG SHOGIGUI_VERSION=0.0.7.27
-ARG YANEURAOU_VERSION=7.10
+ARG SHOGIGUI_VERSION=0.0.7.30
+ARG YANEURAOU_VERSION=7.61
 ARG YANEURAOU_TARGET_CPU=AVX2
 ARG NPROC=4
 
@@ -50,8 +50,8 @@ RUN curl -L $SUISHO_NNUE -o suisho/nn.bin
 ARG YANEURAOU_VERSION
 ARG YANEURAOU_TARGET_CPU
 ARG NPROC
-RUN curl -LO https://github.com/yaneurao/YaneuraOu/archive/v${YANEURAOU_VERSION}.tar.gz && \
-    tar xzfv v${YANEURAOU_VERSION}.tar.gz && \
+RUN curl -LO https://github.com/yaneurao/YaneuraOu/archive/V${YANEURAOU_VERSION}.tar.gz && \
+    tar xzfv V${YANEURAOU_VERSION}.tar.gz && \
     cd YaneuraOu-${YANEURAOU_VERSION}/source && \
     make -j${NPROC} TARGET_CPU=${YANEURAOU_TARGET_CPU}
 

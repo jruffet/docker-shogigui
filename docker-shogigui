@@ -4,8 +4,8 @@ trap 'cleanup' ERR
 
 #######################################################
 ## STATIC GLOBALS
-readonly SHOGIGUI_VERSION=0.0.7.27
-readonly YANEURAOU_VERSION=7.10
+readonly SHOGIGUI_VERSION=0.0.7.30
+readonly YANEURAOU_VERSION=7.61
 
 readonly SCRIPT_NAME="docker-shogigui"
 readonly CONF_DIR="$HOME/.shogigui"
@@ -14,7 +14,7 @@ readonly CONF_DIR="$HOME/.shogigui"
 ## USAGE
 usage() {
     cat <<EOF
-Usage: $SCRIPT_NAME [command] [options] 
+Usage: $SCRIPT_NAME [command] [options]
 
 Examples:
     $SCRIPT_NAME --build
