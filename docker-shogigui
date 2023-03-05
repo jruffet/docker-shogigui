@@ -69,8 +69,8 @@ function build_docker_image() {
     # try those flags in order of preference
     if $(grep -m1 "model name" /proc/cpuinfo | grep -q AMD); then
         YANEURAOU_TARGET_CPU=ZEN2
-    elif $(grep -q avx512 <<< $cpu_flags); then
-        YANEURAOU_TARGET_CPU=AVX512
+    # elif $(grep -q avx512 <<< $cpu_flags); then
+    #     YANEURAOU_TARGET_CPU=AVX512
     elif $(grep -q avx2 <<< $cpu_flags); then
         YANEURAOU_TARGET_CPU=AVX2
     elif $(grep -q sse4_2 <<< $cpu_flags); then
