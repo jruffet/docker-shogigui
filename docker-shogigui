@@ -65,7 +65,7 @@ function cleanup() {
 }
 
 function build_docker_image() {
-	vendor_id=$(lscpu | grep -im1 "vendor id")
+    vendor_id=$(lscpu | grep -im1 "vendor id")
     # try those flags in order of preference
     if $(grep -qi AMD <<< $vendor_id); then
         YANEURAOU_TARGET_CPU=ZEN2
@@ -73,19 +73,19 @@ function build_docker_image() {
         YANEURAOU_TARGET_CPU=OTHER
     # elif $(grep -q avx512 <<< $cpu_flags); then
     #     YANEURAOU_TARGET_CPU=AVX512
-	else
-		cpu_flags=$(lscpu | grep -im1 "flags")
-		if $(grep -q avx2 <<< $cpu_flags); then
-			YANEURAOU_TARGET_CPU=AVX2
-		elif $(grep -q sse4_2 <<< $cpu_flags); then
-			YANEURAOU_TARGET_CPU=SSE42
-		elif $(grep -q sse4_1 <<< $cpu_flags); then
-			YANEURAOU_TARGET_CPU=SSE41
-		elif $(grep -q sse2 <<< $cpu_flags); then
-			YANEURAOU_TARGET_CPU=SSE2
-		else
-			YANEURAOU_TARGET_CPU=NO_SSE
-		fi
+    else
+        cpu_flags=$(lscpu | grep -im1 "flags")
+        if $(grep -q avx2 <<< $cpu_flags); then
+            YANEURAOU_TARGET_CPU=AVX2
+        elif $(grep -q sse4_2 <<< $cpu_flags); then
+            YANEURAOU_TARGET_CPU=SSE42
+        elif $(grep -q sse4_1 <<< $cpu_flags); then
+            YANEURAOU_TARGET_CPU=SSE41
+        elif $(grep -q sse2 <<< $cpu_flags); then
+            YANEURAOU_TARGET_CPU=SSE2
+        else
+            YANEURAOU_TARGET_CPU=NO_SSE
+        fi
     fi
 
     info "Auto selected CPU arch : $YANEURAOU_TARGET_CPU"
