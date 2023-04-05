@@ -54,7 +54,7 @@ function fatal() { _log "$RED"    "FATAL" "$*"; exit 1 ; }
 ## SCRIPT FUNCTIONS
 function preflight_checks() {
     [ "$UID" -eq 0 ] && fatal "This program should not be run as root"
-    for program in docker sed nproc; do
+    for program in docker sed nproc lscpu; do
         command -v $program >/dev/null 2>&1 || fatal "Command \"$program\" not found on the system"
     done
     docker ps >/dev/null 2>&1 || fatal "Docker cannot be operated by this user"
@@ -65,33 +65,38 @@ function cleanup() {
 }
 
 function build_docker_image() {
-    cpu_flags=$(grep -m1 '^flags' /proc/cpuinfo)
+	vendor_id=$(lscpu | grep -im1 "vendor id")
     # try those flags in order of preference
-    if $(grep -m1 "model name" /proc/cpuinfo | grep -q AMD); then
+    if $(grep -qi AMD <<< $vendor_id); then
         YANEURAOU_TARGET_CPU=ZEN2
+    elif $(grep -qi ARM <<< $vendor_id); then
+        YANEURAOU_TARGET_CPU=OTHER
     # elif $(grep -q avx512 <<< $cpu_flags); then
     #     YANEURAOU_TARGET_CPU=AVX512
-    elif $(grep -q avx2 <<< $cpu_flags); then
-        YANEURAOU_TARGET_CPU=AVX2
-    elif $(grep -q sse4_2 <<< $cpu_flags); then
-        YANEURAOU_TARGET_CPU=SSE42
-    elif $(grep -q sse4_1 <<< $cpu_flags); then
-        YANEURAOU_TARGET_CPU=SSE41
-    elif $(grep -q sse2 <<< $cpu_flags); then
-        YANEURAOU_TARGET_CPU=SSE2
-    else
-        YANEURAOU_TARGET_CPU=NO_SSE
+	else
+		cpu_flags=$(lscpu | grep -im1 "flags")
+		if $(grep -q avx2 <<< $cpu_flags); then
+			YANEURAOU_TARGET_CPU=AVX2
+		elif $(grep -q sse4_2 <<< $cpu_flags); then
+			YANEURAOU_TARGET_CPU=SSE42
+		elif $(grep -q sse4_1 <<< $cpu_flags); then
+			YANEURAOU_TARGET_CPU=SSE41
+		elif $(grep -q sse2 <<< $cpu_flags); then
+			YANEURAOU_TARGET_CPU=SSE2
+		else
+			YANEURAOU_TARGET_CPU=NO_SSE
+		fi
     fi
 
     info "Auto selected CPU arch : $YANEURAOU_TARGET_CPU"
-    info "Building docker image with tag : shogigui${SHOGIGUI_VERSION}:yaneuraou${YANEURAOU_VERSION}-${YANEURAOU_TARGET_CPU}"
+    info "Building docker image with tag : shogigui${SHOGIGUI_VERSION}:yaneuraou${YANEURAOU_VERSION}-${YANEURAOU_TARGET_CPU,,}"
     echo
 
     docker build --build-arg NPROC=$(nproc) \
                  --build-arg SHOGIGUI_VERSION=$SHOGIGUI_VERSION \
                  --build-arg YANEURAOU_VERSION=$YANEURAOU_VERSION \
                  --build-arg YANEURAOU_TARGET_CPU=$YANEURAOU_TARGET_CPU \
-                 -t shogigui${SHOGIGUI_VERSION}:yaneuraou${YANEURAOU_VERSION}-${YANEURAOU_TARGET_CPU} \
+                 -t shogigui${SHOGIGUI_VERSION}:yaneuraou${YANEURAOU_VERSION}-${YANEURAOU_TARGET_CPU,,} \
                  -t shogigui:latest .
 }
 
