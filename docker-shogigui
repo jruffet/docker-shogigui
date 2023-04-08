@@ -92,7 +92,7 @@ function build_docker_image() {
     info "Building docker image with tag : shogigui${SHOGIGUI_VERSION}:yaneuraou${YANEURAOU_VERSION}-${YANEURAOU_TARGET_CPU,,}"
     echo
 
-    docker build --build-arg NPROC=$(nproc) \
+    docker build --network=host --build-arg NPROC=$(nproc) \
                  --build-arg SHOGIGUI_VERSION=$SHOGIGUI_VERSION \
                  --build-arg YANEURAOU_VERSION=$YANEURAOU_VERSION \
                  --build-arg YANEURAOU_TARGET_CPU=$YANEURAOU_TARGET_CPU \
