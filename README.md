@@ -11,7 +11,7 @@ The default configuration file provided sets the following options :
 - Disable sound (see "Troubleshooting" below)
 - Allow the usage of simplified pieces (see "Simplified pieces" below)
 
-## Pre-requesites
+## Prerequisites
 You need to install docker so that it is controllable by your desktop user.
 
 Doing so is outside the scope of this repository, though.
